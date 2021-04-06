@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 public class Poster {
     private int id;
     private String filmName;
+    private int price;
     private int count;
 }

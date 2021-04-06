@@ -3,39 +3,44 @@ package ru.netology.manager;
 import ru.netology.domain.Poster;
 
 public class PosterManager {
-    private Poster [] items = new Poster[0];
+    private Poster[] items = new Poster[0];
+    private int limit;
+
+    public PosterManager(int limit) {
+        this.limit = limit;
+    }
+    
 
     public void add(Poster item) {
-        // создаём новый массив размером на единицу больше
         int length = items.length + 1;
         Poster[] tmp = new Poster[length];
-        // itar + tab
-        // копируем поэлементно
-        // for (int i = 0; i < items.length; i++) {
-        //   tmp[i] = items[i];
-        // }
         System.arraycopy(items, 0, tmp, 0, items.length);
-        // кладём последним наш элемент
         int lastIndex = tmp.length - 1;
         tmp[lastIndex] = item;
         items = tmp;
     }
 
     public Poster[] getAll() {
-        if (items.length <= 10) {
+
+        if (items.length < limit) {
             Poster[] result = new Poster[items.length];
-            for (int i = 0; i < items.length; i++) {
+            for (int i = 0; i < result.length; i++) {
                 int index = items.length - i - 1;
                 result[i] = items[index];
             }
             return result;
-        } else {
-            Poster[] result = new Poster[10];
-            for (int i = 0; i < 10; i++) {
+
+        }
+        else if (limit <= items.length) {
+            Poster[] result = new Poster[limit];
+            for (int i = 0; i < limit; i++) {
                 int index = items.length - i - 1;
                 result[i] = items[index];
             }
             return result;
         }
+        return null;
     }
+
+
 }
